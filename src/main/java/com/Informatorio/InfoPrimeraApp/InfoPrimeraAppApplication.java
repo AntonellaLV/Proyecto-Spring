@@ -1,13 +1,13 @@
-package com.Info.primeraappspring;
+package com.Informatorio.InfoPrimeraApp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PrimeraAppSpringApplication {
+public class InfoPrimeraAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PrimeraAppSpringApplication.class, args);
+		SpringApplication.run(InfoPrimeraAppApplication.class, args);
 	}
 
 }
