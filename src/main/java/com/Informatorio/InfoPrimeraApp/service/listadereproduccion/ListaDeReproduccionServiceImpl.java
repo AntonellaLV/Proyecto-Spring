@@ -3,7 +3,6 @@ package com.Informatorio.InfoPrimeraApp.service.listadereproduccion;
 
 import com.Informatorio.InfoPrimeraApp.dominio.ListaDeReproduccion;
 import com.Informatorio.InfoPrimeraApp.repository.ListaDeReproduccionRepository;
-import com.Informatorio.InfoPrimeraApp.service.listadereproduccion.ListaDeReproduccionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
