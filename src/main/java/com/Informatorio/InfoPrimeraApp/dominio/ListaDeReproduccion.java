@@ -1,31 +1,32 @@
 package com.Informatorio.InfoPrimeraApp.dominio;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class ListaDeReproduccion extends Auditoria {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
     private String nombre;
-    private Boolean repetirAlFinalizar;
-    private Boolean reproduccionAleatoria;
-    private Boolean esPublica;
 
     @ManyToOne
     private Usuario usuario;
 
     @ManyToMany
-    private List<Cancion> canciones;
+    @JoinTable(name = "lista_canciones", joinColumns = @JoinColumn(name = "lista_id"), inverseJoinColumns = @JoinColumn(name = "cancion_id"))
+    private List<Cancion> canciones = new ArrayList<>();
+
+    private boolean esPublica;
+    private boolean repetir;
+    private boolean aleatoria;
 }

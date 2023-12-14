@@ -1,30 +1,30 @@
 package com.Informatorio.InfoPrimeraApp.dominio;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Usuario extends Auditoria {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
+
+    @Column(nullable = false, unique = true)
     private String nombreUsuario;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<ListaDeReproduccion> listasDeReproduccion;
+    private String nombre;
 
-
-    public Usuario(String nombre, String nombreUsuario) {
-        this.nombre = nombre;
-        this.nombreUsuario = nombreUsuario;
-    }
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ListaDeReproduccion> listasDeReproduccion = new ArrayList<>();
 }
+

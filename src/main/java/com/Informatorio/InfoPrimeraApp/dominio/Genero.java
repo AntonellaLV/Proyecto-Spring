@@ -1,24 +1,24 @@
 package com.Informatorio.InfoPrimeraApp.dominio;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToMany;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Genero extends Auditoria {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
     private String nombre;
 
-    @ManyToMany(mappedBy = "generos")
-    private List<Cancion> canciones;
+    @OneToMany(mappedBy = "genero", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cancion> canciones = new ArrayList<>();
 }

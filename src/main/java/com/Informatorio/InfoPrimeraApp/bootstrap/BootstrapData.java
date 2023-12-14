@@ -1,30 +1,87 @@
 package com.Informatorio.InfoPrimeraApp.bootstrap;
 
+import com.Informatorio.InfoPrimeraApp.dominio.ListaDeReproduccion;
+import com.Informatorio.InfoPrimeraApp.dominio.Artista;
+import com.Informatorio.InfoPrimeraApp.dominio.Cancion;
+import com.Informatorio.InfoPrimeraApp.dominio.Genero;
 import com.Informatorio.InfoPrimeraApp.dominio.Usuario;
+import com.Informatorio.InfoPrimeraApp.repository.ArtistaRepository;
+import com.Informatorio.InfoPrimeraApp.repository.CancionRepository;
+import com.Informatorio.InfoPrimeraApp.repository.GeneroRepository;
 import com.Informatorio.InfoPrimeraApp.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.Informatorio.InfoPrimeraApp.repository.ListaDeReproduccionRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.UUID;
 
 @Component
+@AllArgsConstructor
 public class BootstrapData implements CommandLineRunner {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final CancionRepository cancionRepository;
+    private final ArtistaRepository artistaRepository;
+    private final GeneroRepository generoRepository;
+    private final ListaDeReproduccionRepository listaDeReproduccionRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        // Crear algunos usuarios de prueba
-        Usuario usuario1 = new Usuario("Nombre1", "Username1");
-        Usuario usuario2 = new Usuario("Nombre2", "Username2");
-        Usuario usuario3 = new Usuario("Nombre3", "Username3");
+        cargarUsuarios();
+        cargarArtistasYGeneros();
+        cargarCanciones();
+        cargarListasDeReproduccion();
+    }
 
-        // Guardar usuarios en la base de datos
-        usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3));
+    private void cargarUsuarios() {
+        Usuario usuario = new Usuario();
+        usuario.setNombreUsuario("usuario_prueba");
+        usuario.setNombre("Usuario de Prueba");
+        usuario.setCreadoEn(LocalDateTime.now());
+        usuarioRepository.save(usuario);
+    }
 
-        // Mensaje de confirmación
-        System.out.println("Usuarios cargados: " + usuarioRepository.count());
+    private void cargarArtistasYGeneros() {
+        Artista artista = new Artista();
+        artista.setNombre("Artista de Prueba");
+        artista.setCreadoEn(LocalDateTime.now());
+        artistaRepository.save(artista);
+
+        Genero genero = new Genero();
+        genero.setNombre("Genero de Prueba");
+        genero.setCreadoEn(LocalDateTime.now());
+        generoRepository.save(genero);
+    }
+
+    private void cargarCanciones() {
+        Artista artista = artistaRepository.findAll().get(0);
+        Genero genero = generoRepository.findAll().get(0);
+
+        Cancion cancion = new Cancion();
+        cancion.setNombre("Cancion de Prueba");
+        cancion.setDuracion(3.5);
+        cancion.setArtista(artista);
+        cancion.setGenero(genero);
+        cancion.setCreadoEn(LocalDateTime.now());
+        cancionRepository.save(cancion);
+    }
+
+    private void cargarListasDeReproduccion() {
+        Usuario usuario = usuarioRepository.findAll().get(0);
+        Cancion cancion = cancionRepository.findAll().get(0);
+
+        ListaDeReproduccion lista = new ListaDeReproduccion();
+        lista.setNombre("Lista de Prueba");
+        lista.setCanciones(Collections.singletonList(cancion));
+        lista.setUsuario(usuario);
+        lista.setEsPublica(true);
+        lista.setRepetir(false);
+        lista.setAleatoria(false);
+        lista.setCreadoEn(LocalDateTime.now());
+        listaDeReproduccionRepository.save(lista);
     }
 }
+

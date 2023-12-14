@@ -1,32 +1,22 @@
 package com.Informatorio.InfoPrimeraApp.controller;
 
-import com.Informatorio.InfoPrimeraApp.dominio.Cancion;
-import com.Informatorio.InfoPrimeraApp.repository.CancionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.Informatorio.InfoPrimeraApp.dto.CancionDto;
+import com.Informatorio.InfoPrimeraApp.service.cancion.CancionService;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/canciones")
+@RequestMapping(value = "/api/v1/canciones", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class CancionController {
 
-    private final CancionRepository cancionRepository;
+    private final CancionService cancionService;
 
-    @Autowired
-    public CancionController(CancionRepository cancionRepository) {
-        this.cancionRepository = cancionRepository;
+    public CancionController(CancionService cancionService) {
+        this.cancionService = cancionService;
     }
 
-    @GetMapping
-    public List<Cancion> getAllCanciones() {
-        return cancionRepository.findAll();
-    }
-
-    @PostMapping
-    public Cancion createCancion(@RequestBody Cancion cancion) {
-        return cancionRepository.save(cancion);
-    }
-
-    // Otros endpoints como PUT, DELETE, etc.
+    // Métodos para manejar las operaciones de Cancion
 }
+

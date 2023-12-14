@@ -1,32 +1,21 @@
 package com.Informatorio.InfoPrimeraApp.controller;
 
-import com.Informatorio.InfoPrimeraApp.dominio.Genero;
-import com.Informatorio.InfoPrimeraApp.repository.GeneroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import com.Informatorio.InfoPrimeraApp.dto.GeneroDto;
+import com.Informatorio.InfoPrimeraApp.service.genero.GeneroService;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/generos")
+@RequestMapping(value = "/api/v1/generos", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class GeneroController {
 
-    private final GeneroRepository generoRepository;
+    private final GeneroService generoService;
 
-    @Autowired
-    public GeneroController(GeneroRepository generoRepository) {
-        this.generoRepository = generoRepository;
+    public GeneroController(GeneroService generoService) {
+        this.generoService = generoService;
     }
 
-    @GetMapping
-    public List<Genero> getAllGeneros() {
-        return generoRepository.findAll();
-    }
-
-    @PostMapping
-    public Genero createGenero(@RequestBody Genero genero) {
-        return generoRepository.save(genero);
-    }
-
-    // Otros endpoints como PUT, DELETE, etc.
+    // Métodos para manejar las operaciones de Genero
 }
+

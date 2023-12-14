@@ -1,24 +1,24 @@
 package com.Informatorio.InfoPrimeraApp.dominio;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Artista extends Auditoria {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
     private String nombre;
 
-    @OneToMany(mappedBy = "artista")
-    private List<Cancion> canciones;
+    @OneToMany(mappedBy = "artista", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cancion> canciones = new ArrayList<>();
 }
