@@ -52,6 +52,9 @@ Consideraciones adicionales:
 ●	NO ES NECESARIO, realizar validación de datos, es opcional, sin embargo tendrás más puntaje si lo haces.
 ●	NO ES NECESARIO, pero podrían optar por hacer una carga masiva de datos.
 
+
+Diagrama Plataforma De Streaming De Música: https://drive.google.com/file/d/1NO5NrG32qXjhubG7B_E_fS0mEZvmhnl1/view?usp=sharing
+
 Para la aprobación del TPI de SPRING, es necesario tener aprobado el TPI de JAVA.
 
 Para dependencias de maven : https://mvnrepository.com/
