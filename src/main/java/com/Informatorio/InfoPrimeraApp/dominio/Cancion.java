@@ -22,4 +22,6 @@ public class Cancion extends Auditoria {
 
     @ManyToOne
     private Genero genero;
+    private Integer ranking;
+    private String album;
 }

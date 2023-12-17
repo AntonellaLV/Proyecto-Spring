@@ -2,12 +2,16 @@ package com.Informatorio.InfoPrimeraApp.service.usuario;
 
 
 import com.Informatorio.InfoPrimeraApp.dominio.Usuario;
+import com.Informatorio.InfoPrimeraApp.dto.UsuarioDto;
+import com.Informatorio.InfoPrimeraApp.exception.NotFoundException;
+import com.Informatorio.InfoPrimeraApp.mapper.UsuarioMapper;
 import com.Informatorio.InfoPrimeraApp.repository.UsuarioRepository;
-import com.Informatorio.InfoPrimeraApp.service.usuario.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -16,20 +20,40 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     @Override
-    public Usuario crearUsuario(Usuario usuario) {
+    public Usuario crearUsuario(UsuarioDto usuarioDto) {
+        Usuario usuario = UsuarioMapper.toUsuario(usuarioDto);
         return usuarioRepository.save(usuario);
     }
 
     @Override
-    public Usuario obtenerUsuarioPorId(UUID id) {
-        return usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
+    public UsuarioDto obtenerUsuarioPorId(UUID id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Usuario", "ID", id.toString()));
+        return UsuarioMapper.toUsuarioDto(usuario);
     }
 
     @Override
-    public void eliminarUsuario(UUID id) {
-        usuarioRepository.deleteById(id);
+    public boolean eliminarUsuario(UUID idUsuario) {
+        if (!usuarioRepository.existsById(idUsuario)) {
+            return false;
+        }
+        usuarioRepository.deleteById(idUsuario);
+        return true;
     }
 
-    // Implementación de otros métodos necesarios
+    @Override
+    public Usuario actualizarUsuario(UUID idUsuario, UsuarioDto usuarioDto) {
+        Usuario usuarioExistente = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new NotFoundException("Usuario", "ID", idUsuario.toString()));
+
+
+        return usuarioRepository.save(usuarioExistente);
+    }
+
+    @Override
+    public List<UsuarioDto> obtenerTodosLosUsuarios() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        return usuarios.stream().map(UsuarioMapper::toUsuarioDto).collect(Collectors.toList());
+    }
+
 }

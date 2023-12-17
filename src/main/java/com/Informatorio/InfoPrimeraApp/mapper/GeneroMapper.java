@@ -10,15 +10,12 @@ public class GeneroMapper {
         GeneroDto generoDto = new GeneroDto();
         generoDto.setId(genero.getId().toString());
         generoDto.setNombre(genero.getNombre());
-        // otros mapeos necesarios
         return generoDto;
     }
 
     public static Genero toGenero(GeneroDto generoDto) {
         Genero genero = new Genero();
-        // asume que el ID es manejado automáticamente o no necesario aquí
         genero.setNombre(generoDto.getNombre());
-        // otros mapeos necesarios
         return genero;
     }
 }

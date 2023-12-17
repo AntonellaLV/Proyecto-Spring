@@ -2,12 +2,17 @@ package com.Informatorio.InfoPrimeraApp.service.artista;
 
 
 import com.Informatorio.InfoPrimeraApp.dominio.Artista;
+import com.Informatorio.InfoPrimeraApp.dto.ArtistaDto;
+import com.Informatorio.InfoPrimeraApp.exception.NotFoundException;
+import com.Informatorio.InfoPrimeraApp.mapper.ArtistaMapper;
 import com.Informatorio.InfoPrimeraApp.repository.ArtistaRepository;
 import com.Informatorio.InfoPrimeraApp.service.artista.ArtistaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -16,21 +21,52 @@ public class ArtistaServiceImpl implements ArtistaService {
     private final ArtistaRepository artistaRepository;
 
     @Override
-    public Artista crearArtista(Artista artista) {
+    public Artista crearArtista(ArtistaDto artistaDto) {
+        Artista artista = ArtistaMapper.toArtista(artistaDto);
         return artistaRepository.save(artista);
     }
 
     @Override
-    public Artista obtenerArtistaPorId(UUID id) {
-        return artistaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Artista no encontrado con id: " + id));
+    public ArtistaDto obtenerArtistaPorId(UUID id) {
+        Artista artista = artistaRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Artista", "ID", id.toString()));
+        return ArtistaMapper.toArtistaDto(artista);
     }
 
     @Override
-    public void eliminarArtista(UUID id) {
-        artistaRepository.deleteById(id);
+    public boolean eliminarArtista(UUID idArtista) {
+        if (!artistaRepository.existsById(idArtista)) {
+            return false;
+        }
+        artistaRepository.deleteById(idArtista);
+        return true;
     }
 
-    // Implementación de otros métodos necesarios
-}
 
+    @Override
+    public Artista actualizarArtista(UUID idArtista, ArtistaDto artistaDto) {
+        Artista artistaExistente = artistaRepository.findById(idArtista)
+                .orElseThrow(() -> new NotFoundException("Artista", "ID", idArtista.toString()));
+
+        if (artistaDto.getNombre() != null && !artistaDto.getNombre().isEmpty()) {
+            artistaExistente.setNombre(artistaDto.getNombre());
+        }
+
+        return artistaRepository.save(artistaExistente);
+    }
+
+    @Override
+    public List<ArtistaDto> obtenerArtistasPorNombre(String nombre) {
+        List<Artista> artistas = artistaRepository.findByNombreContaining(nombre);
+        return artistas.stream()
+                .map(ArtistaMapper::toArtistaDto)
+                .collect(Collectors.toList());
+    }
+    @Override
+    public List<ArtistaDto> obtenerTodosLosArtistas() {
+        List<Artista> artistas = artistaRepository.findAll();
+        return artistas.stream()
+                .map(ArtistaMapper::toArtistaDto)
+                .collect(Collectors.toList());
+    }
+}

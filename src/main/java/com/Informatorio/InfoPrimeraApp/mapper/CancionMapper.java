@@ -10,16 +10,17 @@ public class CancionMapper {
         cancionDto.setId(cancion.getId().toString());
         cancionDto.setNombre(cancion.getNombre());
         cancionDto.setDuracion(cancion.getDuracion());
-        // otros mapeos necesarios
+        cancionDto.setRanking(cancion.getRanking());
+        cancionDto.setAlbum(cancion.getAlbum());
         return cancionDto;
     }
 
     public static Cancion toCancion(CancionDto cancionDto) {
         Cancion cancion = new Cancion();
-        // asume que el ID es manejado automáticamente o no necesario aquí
         cancion.setNombre(cancionDto.getNombre());
         cancion.setDuracion(cancionDto.getDuracion());
-        // otros mapeos necesarios
+        cancion.setRanking(cancionDto.getRanking());
+        cancion.setAlbum(cancionDto.getAlbum());
         return cancion;
     }
 }

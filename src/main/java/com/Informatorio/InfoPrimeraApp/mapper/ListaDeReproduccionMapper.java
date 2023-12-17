@@ -19,16 +19,12 @@ public class ListaDeReproduccionMapper {
         listaDto.setEsPublica(lista.isEsPublica());
         listaDto.setRepetir(lista.isRepetir());
         listaDto.setAleatoria(lista.isAleatoria());
-        // otros mapeos necesarios
         return listaDto;
     }
 
     public static ListaDeReproduccion toListaDeReproduccion(ListaDeReproduccionDto listaDto) {
         ListaDeReproduccion lista = new ListaDeReproduccion();
-        // asume que el ID es manejado automáticamente o no necesario aquí
         lista.setNombre(listaDto.getNombre());
-        // El mapeo de canciones y usuario se manejaría aquí si es necesario
-        // otros mapeos necesarios
         return lista;
     }
 }

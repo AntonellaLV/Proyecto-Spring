@@ -14,6 +14,6 @@ public class ListaDeReproduccionDto {
     private boolean esPublica;
     private boolean repetir;
     private boolean aleatoria;
-    // Puedes agregar más campos según los requerimientos
+
 }
 
