@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -34,6 +35,7 @@ public class BootstrapData implements CommandLineRunner {
         cargarArtistasYGeneros();
         cargarCanciones();
         cargarListasDeReproduccion();
+        cargarDatosMasivos();
     }
 
     private void cargarUsuarios() {
@@ -84,5 +86,40 @@ public class BootstrapData implements CommandLineRunner {
         lista.setAleatoria(false);
         lista.setCreadoEn(LocalDateTime.now());
         listaDeReproduccionRepository.save(lista);
+    }
+
+    private void cargarDatosMasivos() {
+        // Creación masiva de artistas
+        for (int i = 1; i <= 10; i++) {
+            Artista artista = new Artista();
+            artista.setNombre("Artista " + i);
+            artista.setCreadoEn(LocalDateTime.now());
+            artistaRepository.save(artista);
+        }
+
+        // Creación masiva de géneros
+        for (int i = 1; i <= 5; i++) {
+            Genero genero = new Genero();
+            genero.setNombre("Género " + i);
+            genero.setCreadoEn(LocalDateTime.now());
+            generoRepository.save(genero);
+        }
+
+        // Obteniendo artistas y géneros aleatorios
+        List<Artista> artistas = artistaRepository.findAll();
+        List<Genero> generos = generoRepository.findAll();
+
+        // Creación masiva de canciones
+        for (int i = 1; i <= 20; i++) {
+            Cancion cancion = new Cancion();
+            cancion.setNombre("Canción " + i);
+            cancion.setDuracion(Math.random() * 5); // Duración aleatoria entre 0 y 5 minutos
+            cancion.setArtista(artistas.get((int)(Math.random() * artistas.size()))); // Artista aleatorio
+            cancion.setGenero(generos.get((int)(Math.random() * generos.size()))); // Género aleatorio
+            cancion.setAlbum("Álbum " + (i % 5 + 1)); // Álbum aleatorio
+            cancion.setRanking((int)(Math.random() * 10 + 1)); // Ranking aleatorio entre 1 y 10
+            cancion.setCreadoEn(LocalDateTime.now());
+            cancionRepository.save(cancion);
+        }
     }
 }
