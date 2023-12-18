@@ -1,6 +1,5 @@
 package com.Informatorio.InfoPrimeraApp.controller;
 
-
 import com.Informatorio.InfoPrimeraApp.dominio.Usuario;
 import com.Informatorio.InfoPrimeraApp.dto.UsuarioDto;
 import com.Informatorio.InfoPrimeraApp.service.usuario.UsuarioService;
@@ -26,15 +25,14 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
     }
 
-
     @GetMapping("/{idUsuario}")
     public ResponseEntity<UsuarioDto> obtenerUsuarioPorId(@PathVariable UUID idUsuario) {
         UsuarioDto usuarioDto = usuarioService.obtenerUsuarioPorId(idUsuario);
         return ResponseEntity.ok(usuarioDto);
     }
 
-
-    @GetMapping("/{idUsuario}")
+    // Cambiado para obtener todos los usuarios
+    @GetMapping
     public ResponseEntity<List<UsuarioDto>> obtenerTodosLosUsuarios() {
         List<UsuarioDto> usuarios = usuarioService.obtenerTodosLosUsuarios();
         return ResponseEntity.ok(usuarios);
@@ -52,5 +50,3 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
-
-

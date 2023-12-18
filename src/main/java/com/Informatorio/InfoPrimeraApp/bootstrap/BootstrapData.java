@@ -65,6 +65,8 @@ public class BootstrapData implements CommandLineRunner {
         cancion.setDuracion(3.5);
         cancion.setArtista(artista);
         cancion.setGenero(genero);
+        cancion.setAlbum("Album de Prueba");
+        cancion.setRanking(1);
         cancion.setCreadoEn(LocalDateTime.now());
         cancionRepository.save(cancion);
     }
@@ -84,4 +86,3 @@ public class BootstrapData implements CommandLineRunner {
         listaDeReproduccionRepository.save(lista);
     }
 }
-
