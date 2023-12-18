@@ -3,7 +3,6 @@ package com.Informatorio.InfoPrimeraApp.constants;
 
 public class ConstantsUtils {
 
-    // Constructor privado para prevenir instanciación
     private ConstantsUtils() {}
 
     // Códigos de Estado Comunes
