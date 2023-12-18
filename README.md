@@ -56,5 +56,3 @@ Para la aprobación del TPI de SPRING, es necesario tener aprobado el TPI de JAV
 Para dependencias de maven : https://mvnrepository.com/
 
 Adjunto el Diagrama De Plataforma De Streaming De Música: https://drive.google.com/file/d/1NO5NrG32qXjhubG7B_E_fS0mEZvmhnl1/view?usp=sharing
-Diagrama Sistema Bancario.png
-Diagrama Sistema Bancario.png
