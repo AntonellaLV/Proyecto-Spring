@@ -52,7 +52,7 @@ Consideraciones adicionales:
 
 ●	Utilizar una base de datos ya sea mysql, oracle o H2.
 
-● Utilizar el framework Spring Boot para la construcción de la aplicación, aprovechando su capacidad de gestión de dependencias y configuración automática.
+●   Utilizar el framework Spring Boot para la construcción de la aplicación, aprovechando su capacidad de gestión de dependencias y configuración automática.
 
 ●	Podrías optar por crear un diagrama de clases antes de pasar al código.
 
