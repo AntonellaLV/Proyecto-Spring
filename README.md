@@ -2,7 +2,7 @@
 
 Realizar el siguiente trabajo práctico final, aplicando lo visto de JAVA y SPRING en clases.
 
-Fecha de entrega : -
+Fecha de entrega : 22/12/2023.
 
 ESCENARIO
 
@@ -11,9 +11,13 @@ La Plataforma de Streaming de Música es una aplicación que ofrece a los usuari
 Entidades:
 
 -	Usuario : El cual se conoce como datos, el id, nombre, nombre de usuario y listas de reproducción.
+  
 -	Canción : Se conoce como datos Id, nombre, ranking, géneros, duración, artista, álbum.
+
 -	Género : Se tiene como datos el id, nombre y las canciones.
+
 -	Artista : El cual se conoce como datos, el id, nombre.
+
 -	Lista de reproducción : El cual se compone del usuario al que pertenece la lista, las canciones, repetir lista al finalizar, si esta se puede reproducir aleatoriamente y si esta es públicas.
 
 Se debe además agregar una entidad de auditoría.
@@ -46,10 +50,14 @@ Para los puntos 3, 4 y 5 se debe permitir estas acciones si y sólo si el usuari
 
 Consideraciones adicionales:
 
-●	Utilizar una base de datos para persistir la información de los juegos, desarrolladores y tareas.
-●	Utilizar el framework Spring Boot para la construcción de la aplicación, aprovechando su capacidad de gestión de dependencias y configuración automática.
+●	Utilizar una base de datos ya sea mysql, oracle o H2.
+
+● Utilizar el framework Spring Boot para la construcción de la aplicación, aprovechando su capacidad de gestión de dependencias y configuración automática.
+
 ●	Podrías optar por crear un diagrama de clases antes de pasar al código.
+
 ●	NO ES NECESARIO, realizar validación de datos, es opcional, sin embargo tendrás más puntaje si lo haces.
+
 ●	NO ES NECESARIO, pero podrían optar por hacer una carga masiva de datos.
 
 Para la aprobación del TPI de SPRING, es necesario tener aprobado el TPI de JAVA.
