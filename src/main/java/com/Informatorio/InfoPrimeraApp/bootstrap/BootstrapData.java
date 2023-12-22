@@ -121,5 +121,14 @@ public class BootstrapData implements CommandLineRunner {
             cancion.setCreadoEn(LocalDateTime.now());
             cancionRepository.save(cancion);
         }
+
+        // Creación masiva de usuarios
+        for (int i = 1; i <= 15; i++) {
+            Usuario usuario = new Usuario();
+            usuario.setNombreUsuario("usuario" + i);
+            usuario.setNombre("Usuario " + i);
+            usuario.setCreadoEn(LocalDateTime.now());
+            usuarioRepository.save(usuario);
+        }
     }
 }
