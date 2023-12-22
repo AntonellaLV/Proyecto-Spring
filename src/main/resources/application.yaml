@@ -1,3 +1,4 @@
+# H2 DATABASE
 server:
   port: 8080
 
@@ -15,3 +16,21 @@ spring:
     hibernate:
       ddl-auto: update
       show-sql: true
+
+---
+# MYSQL DATABASE
+
+spring:
+  config:
+    activate:
+      on-profile: mysql
+  datasource:
+    url: jdbc:mysql://localhost:3306/springprojectmusic
+    username: root
+    password: root12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
